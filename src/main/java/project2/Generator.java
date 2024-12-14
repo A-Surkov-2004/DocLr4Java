@@ -1,5 +1,6 @@
 package project2;
 
+import java.nio.file.Path;
 import java.util.*;
 
 public class Generator {
@@ -15,7 +16,7 @@ public class Generator {
     public final static char SPACE = ' ';
     private char[][] map;
 
-    private boolean haveExit = false;
+    private boolean haveExit = true;
 
     public Generator(int n) {
         /**
@@ -43,12 +44,26 @@ public class Generator {
         Deque<Dot> stack = new ArrayDeque<>();
         dfs(stack);
 
-        if (!haveExit) {
-            map[n - 1][m - 2] = SPACE;
-        }
+        map = transpose(map);
+
+        map[n - 1][m - 2] = EXIT;
+        map[0][1] = SPACE;
+
+
+
 
         return map;
     }
+
+    private static char[][] transpose(char [][] m){
+        char[][] temp = new char[m[0].length][m.length];
+        int l = m.length;
+        for (int i = 0; i < m.length; i++)
+            for (int j = 0; j < m[0].length; j++)
+                temp[i][j] = m[l-i-1][l-j-1];
+        return temp;
+    }
+
 
     private void addMove(List<Dot> possibleMoves, Dot mDot) {
 
@@ -131,6 +146,7 @@ public class Generator {
             last = cDot;
         }
     }
+
 
     private record Dot(int i, int j) {
         /**

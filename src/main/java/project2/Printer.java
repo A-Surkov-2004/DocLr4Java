@@ -12,6 +12,9 @@ public class Printer {
     private static final String BLACK = "\u001B[40m";
     private static final String RED = "\u001B[41m";
     private static final String WHITE = "\u001B[47m";
+    private static final String ORANGE = "\u001B[43m";
+    private static final String PURPLE = "\u001B[45m";
+    private static final String BLUE = "\u001B[46m";
     private static final String WIDE = "   ";
 
     private final static Logger LOGGER = LogManager.getLogger();
@@ -31,10 +34,17 @@ public class Printer {
                 } else if (j == Generator.SPACE) {
                     string.append(BLACK);
                 } else if (j == Generator.EXIT) {
-                    string.append(RED);
+                    string.append(PURPLE);
                 } else if (j == Solver.PATH) {
                     string.append(RED);
+                }else if (j == Solver.WAS) {
+                    string.append(ORANGE);
+                }else if (j == Solver.CURRENT) {
+                    string.append(BLUE);
+                }else if (j == Solver.TRACE) {
+                    string.append(BLUE);
                 }
+
                 string.append(WIDE);
             }
             string.append(BLACK);
